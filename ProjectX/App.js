@@ -13,6 +13,7 @@ import {
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { setCustomText } from 'react-native-global-props';
 
 import Home from './screens/home';
 import Login from './screens/login';
@@ -20,11 +21,22 @@ import SignUp from './screens/signUp';
 
 const Stack = createStackNavigator();
 
+const customTextProps = {
+  style: {
+    fontFamily: 'monospace'
+  }
+};
+
+setCustomText(customTextProps);
+
 const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
         initialRouteName="home"
+        screenOptions={{
+          headerShown: false,
+        }}
       >
         <Stack.Screen name="home" component={Home} />
         <Stack.Screen name="login" component={Login} />
@@ -34,8 +46,5 @@ const App = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  
-});
 
 export default App;
