@@ -9,7 +9,7 @@ import {
 import homeBackground from '../assets/homeBackground.png';
 
 import {
-  Button, withTheme
+  Button,
 } from 'react-native-elements';
 
 
