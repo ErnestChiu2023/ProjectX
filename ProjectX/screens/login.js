@@ -3,6 +3,8 @@ import {
   StyleSheet,
   ImageBackground,
   Alert,
+  TouchableOpacity,
+  Text,
 } from 'react-native';
 
 import homeBackground from '../assets/homeBackground.png';
@@ -20,22 +22,20 @@ const Login = () => {
   const [password, setPassword] = useState('');
 
   const signin = () => {
-    if (email && password) {
-      auth()
-      .signInWithEmailAndPassword(email, password)
-      .then(() => {
-        console.log('User account signed in!');
-      })
-      .catch(error => {
-        if (error.code === 'auth/wrong-password') {
-          console.log(error);
-          Alert.alert('Wrong Credentials...', 'Your credentials didn\'t match anything we have', [
-            {text: 'Try Again', onPress: () => console.log('wrong creds alert closed')}
-          ]);
-        }
+    auth()
+    .signInWithEmailAndPassword(email, password)
+    .then(() => {
+      console.log('User account signed in!');
+    })
+    .catch(error => {
+      if (error.code === 'auth/wrong-password' || 'auth/invalid-email') {
         console.log(error);
-      });
-    }
+        Alert.alert('Wrong Credentials...', 'Your credentials didn\'t match anything we have', [
+          {text: 'Try Again', onPress: () => console.log('wrong creds alert closed')}
+        ]);
+      }
+      console.log(error);
+    });
   }
 
   return (
@@ -66,6 +66,7 @@ const Login = () => {
       <Button
         title='Log In'
         type='outline'
+        disabled={!email || password.length < 8}
         buttonStyle={styles.buttonContainer}
         onPress={signin}
       />
@@ -84,8 +85,10 @@ const styles = StyleSheet.create({
   buttonContainer: {
     backgroundColor: 'white',
     borderRadius: 10,
-    marginHorizontal: 40
-  }
+    marginHorizontal: 40,
+    justifyContent: "center"
+  },
+
 });
 
 export default Login;
