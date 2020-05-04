@@ -175,7 +175,13 @@ const styles = StyleSheet.create({
     marginHorizontal: 40
   },
   errorStyle: {
-    marginLeft: 40
+    fontSize:14,
+    color:'red',
+    fontWeight: 'bold',
+    marginLeft: 40,
+    textShadowColor:'#2b2d2f',
+    textShadowOffset:{width: .1, height: .1},
+    textShadowRadius: 2,
   }
 });
 
