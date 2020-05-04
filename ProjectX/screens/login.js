@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {
   StyleSheet,
   ImageBackground,
+  Alert,
 } from 'react-native';
 
 import homeBackground from '../assets/homeBackground.png';
@@ -19,7 +20,8 @@ const Login = () => {
   const [password, setPassword] = useState('');
 
   const signin = () => {
-    auth()
+    if (email && password) {
+      auth()
       .signInWithEmailAndPassword(email, password)
       .then(() => {
         console.log('User account signed in!');
@@ -27,9 +29,13 @@ const Login = () => {
       .catch(error => {
         if (error.code === 'auth/wrong-password') {
           console.log(error);
+          Alert.alert('Wrong Credentials...', 'Your credentials didn\'t match anything we have', [
+            {text: 'Try Again', onPress: () => console.log('wrong creds alert closed')}
+          ]);
         }
         console.log(error);
       });
+    }
   }
 
   return (
