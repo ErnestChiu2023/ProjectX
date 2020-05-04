@@ -6,7 +6,8 @@ import {
 } from 'react-native';
 
 import homeBackground from '../assets/homeBackground.png';
-
+import { CommonActions } from '@react-navigation/native';
+import auth from '@react-native-firebase/auth';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { 
   Input,
@@ -15,7 +16,7 @@ import {
 
 import { Formik } from 'formik';
 
-const SignUp = () => {
+const SignUp = ({ navigation }) => {
   return (
     <ImageBackground source={homeBackground} style={{width: '100%', height: '100%'}}>
       <Formik
@@ -61,7 +62,22 @@ const SignUp = () => {
           return errors;
         }}
         onSubmit={(values) => {
-          console.log(values, 'submitted');
+          auth()
+            .createUserWithEmailAndPassword(values.email, values.password)
+            .then(() => {
+              console.log('User account created & signed in!');
+            })
+            .catch(error => {
+              if (error.code === 'auth/email-already-in-use') {
+                console.log('That email address is already in use!');
+              }
+
+              if (error.code === 'auth/invalid-email') {
+                console.log('That email address is invalid!');
+              }
+
+              console.error(error);
+            });
         }}
       >
         {({values, errors, touched, handleChange, handleBlur, handleSubmit}) => (

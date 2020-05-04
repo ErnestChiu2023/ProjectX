@@ -1286,12 +1286,25 @@
     opencollective-postinstall "^2.0.1"
     superstruct "^0.6.2"
 
-"@react-navigation/core@^5.3.5":
-  version "5.3.5"
-  resolved "https://registry.yarnpkg.com/@react-navigation/core/-/core-5.3.5.tgz#a52149c1e6cc6b5c00849d756ace5b3289736637"
-  integrity sha512-s+XL+2r/NS9e0/kcRCBJ2NV7+3zqAqLXFHX2+qzES++oc+gb5A8JSrHjwRUwxMqR2AOqSfz5HSyYXnYIwgl4JQ==
+"@react-native-firebase/auth@^6.7.1":
+  version "6.7.1"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/auth/-/auth-6.7.1.tgz#d0e59e3f4960fdab7858af7bfcf408c4379147d4"
+  integrity sha512-93t4UlyylX1iUj7jSyFfE4voLk2LmBw5oDJ/BdyfAO7u9DysXE4yu3kkaq+hBlBN4tlSfS+XwWXrigCplMbfpg==
+
+"@react-navigation/bottom-tabs@^5.3.3":
+  version "5.3.3"
+  resolved "https://registry.yarnpkg.com/@react-navigation/bottom-tabs/-/bottom-tabs-5.3.3.tgz#fc232218da9cd1334d3d639814dbd27fffed8989"
+  integrity sha512-Tt2sMlzXqmSjdKA5Z/JpiLpuaIeghNoy8HYK5o2r2i0s6GRfIWDPASAOJ4xRIYF7/eqq6WV5dHBFTWaPDunaLg==
   dependencies:
-    "@react-navigation/routers" "^5.4.1"
+    color "^3.1.2"
+    react-native-iphone-x-helper "^1.2.1"
+
+"@react-navigation/core@^5.4.0":
+  version "5.4.0"
+  resolved "https://registry.yarnpkg.com/@react-navigation/core/-/core-5.4.0.tgz#6b4973d48396d28ed3efee582b28807682a5865d"
+  integrity sha512-tDmfw7nzbJg186cXHUPl/VYEGSepzBXNiHRv4GTxLQ+S9cnZgPyrGv56kiSvHhxCzyNGN0nHscCY9IUv08KL6Q==
+  dependencies:
+    "@react-navigation/routers" "^5.4.2"
     escape-string-regexp "^2.0.0"
     nanoid "^3.0.2"
     query-string "^6.12.0"
@@ -1299,16 +1312,16 @@
     use-subscription "^1.4.0"
 
 "@react-navigation/native@^5.1.7":
-  version "5.1.7"
-  resolved "https://registry.yarnpkg.com/@react-navigation/native/-/native-5.1.7.tgz#929815726504007d73ad77301e4659e910fe8d41"
-  integrity sha512-0/TWbeorcLb42AN9KYK4rWzZk3RrpX95vIuqzcI5zPlo/Yhs3h+TEXX1s+6n2MT42W8xHPZzK/RaHnBGKD0aLw==
+  version "5.2.3"
+  resolved "https://registry.yarnpkg.com/@react-navigation/native/-/native-5.2.3.tgz#2e2ec88396d2be96d11f9430b4af6dcea34029b0"
+  integrity sha512-fQfW506n9eTwBGiUbuxSvI7DTBXwR3IqAlooBCUHRJC0WiuSUm3aGg6eESJc8nW1A64hu33i/ITf10mn3Ec6Tg==
   dependencies:
-    "@react-navigation/core" "^5.3.5"
+    "@react-navigation/core" "^5.4.0"
 
-"@react-navigation/routers@^5.4.1":
-  version "5.4.1"
-  resolved "https://registry.yarnpkg.com/@react-navigation/routers/-/routers-5.4.1.tgz#7d5d0931a591e3dd6c917cb5dc7c7ae9e794e1cd"
-  integrity sha512-Gay9yCrE2xuvUUJcbG+giqnh2ZAPyYecO5RJ3tXDztmT+UaJoyHLSfyjkb74gSjij684udtzUKkoXGBbgcANhg==
+"@react-navigation/routers@^5.4.2":
+  version "5.4.2"
+  resolved "https://registry.yarnpkg.com/@react-navigation/routers/-/routers-5.4.2.tgz#10c1f32b0ddde935d1fc9123fb1683472bf31815"
+  integrity sha512-YjGv4H0LXD2YnDjSBAJzIKzlZehFRqWfR2IJtZor/mfLkOi6qDl8yJeqZKbLEeQsu6o6493QdxM81tqX293kyQ==
   dependencies:
     nanoid "^3.0.2"
 
@@ -4937,9 +4950,9 @@ nan@^2.12.1:
   integrity sha512-isWHgVjnFjh2x2yuJ/tj3JbwoHu3UC2dX5G/88Cm24yB6YopVgxvBObDY7n5xW6ExmFhJpSEQqFPvq9zaXc8Jw==
 
 nanoid@^3.0.2:
-  version "3.1.3"
-  resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.1.3.tgz#b2bcfcfda4b4d6838bc22a0c8dd3c0a17a204c20"
-  integrity sha512-Zw8rTOUfh6FlKgkEbHiB1buOF2zOPOQyGirABUWn+9Z7m9PpyoLVkh6Ksc53vBjndINQ2+9LfRPaHxb/u45EGg==
+  version "3.1.4"
+  resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.1.4.tgz#0c39d96aaf6317b580efb6c59903b95ada1b2ac9"
+  integrity sha512-ycTkPSwmUmEdtvPPuszyOCm+Fzw+/AngWkaJ52oZ6l4Mdhh/yNNrWflAzrXbSn3v1mL+GBl6qegU6w6ml5JSWw==
 
 nanomatch@^1.2.9:
   version "1.2.13"

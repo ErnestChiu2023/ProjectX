@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   StyleSheet,
   ImageBackground,
@@ -12,7 +12,26 @@ import {
   Button
  } from 'react-native-elements';
 
+import auth from '@react-native-firebase/auth';
+
 const Login = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const signin = () => {
+    auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(() => {
+        console.log('User account signed in!');
+      })
+      .catch(error => {
+        if (error.code === 'auth/wrong-password') {
+          console.log(error);
+        }
+        console.log(error);
+      });
+  }
+
   return (
     <ImageBackground source={homeBackground} style={{width: '100%', height: '100%'}}>
       <Input
@@ -24,6 +43,7 @@ const Login = () => {
             size={15}
           />
         }
+        onChangeText={text => setEmail(text)}
       />
       <Input
         placeholder='Password'
@@ -35,11 +55,13 @@ const Login = () => {
             size={15}
           />
         }
+        onChangeText={text => setPassword(text)}
       />
       <Button
         title='Log In'
         type='outline'
         buttonStyle={styles.buttonContainer}
+        onPress={signin}
       />
     </ImageBackground>
   );
