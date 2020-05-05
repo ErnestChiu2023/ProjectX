@@ -67,33 +67,33 @@ const SignUp = ({ navigation }) => {
               errors.confirmPassword = 'Passwords don\'t match';
             }
 
-            console.log(errors);
-            return errors;
-          }}
-          onSubmit={(values) => {
-            auth()
-              .createUserWithEmailAndPassword(values.email, values.password)
-              .then(() => {
-                console.log('User account created & signed in!');
+          console.log(errors);
+          return errors;
+        }}
+        onSubmit={(values) => {
+          auth()
+            .createUserWithEmailAndPassword(values.email, values.password)
+            .then((userCredentials) => {
+              console.log('User account created & signed in!');
+              userCredentials.user.updateProfile({
+                displayName: values.username
               })
-              .catch(error => {
-                //Alerts if email is already in use
-                if (error.code === 'auth/email-already-in-use') {
-                  Alert.alert('Email already in use...', 'This email is already associated with an account. Try logging in!', [
-                    {text: 'OK', onPress: () => {console.log('email association alert acknowledged')}}
-                  ]);
-                  console.log('That email address is already in use!');
-                }
-                
-                //Not really needed as we already check for invalid email
-                if (error.code === 'auth/invalid-email') {
-                  Alert.alert('Invalid email...', 'The email entered is invalid. Please try again with a valid email!', [
-                    {text: 'OK', onPress: () => {console.log('email invalid alert acknowledged')}}
-                  ]);
-                  console.log('That email address is invalid!');
-                }
-
-              });
+              .then(() => {
+                console.log('user username udpated');
+              })
+              .catch((error) => {
+                throw error;
+              })
+            })
+            .catch(error => {
+              //Alerts if email is already in use
+              if (error.code === 'auth/email-already-in-use') {
+                Alert.alert('Email already in use...', 'This email is already associated with an account. Try logging in!', [
+                  {text: 'OK', onPress: () => {console.log('email association alert acknowledged')}}
+                ]);
+                console.log('That email address is already in use!');
+              }
+            });
           }}
         >
           {({values, errors, touched, handleChange, handleBlur, handleSubmit}) => (
