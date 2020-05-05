@@ -3,8 +3,8 @@ import {
   StyleSheet,
   ImageBackground,
   Alert,
-  TouchableOpacity,
-  Text,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from 'react-native';
 
 import homeBackground from '../assets/homeBackground.png';
@@ -39,38 +39,45 @@ const Login = () => {
   }
 
   return (
-    <ImageBackground source={homeBackground} style={{width: '100%', height: '100%'}}>
-      <Input
-        placeholder='Email'
-        inputContainerStyle={{...styles.inputContainer, marginTop: '60%'}}
-        leftIcon={
-          <Icon
-            name='envelope'
-            size={15}
-          />
-        }
-        onChangeText={text => setEmail(text)}
-      />
-      <Input
-        placeholder='Password'
-        inputContainerStyle={styles.inputContainer}
-        secureTextEntry={true}
-        leftIcon={
-          <Icon
-            name='unlock-alt'
-            size={15}
-          />
-        }
-        onChangeText={text => setPassword(text)}
-      />
-      <Button
-        title='Log In'
-        type='outline'
-        disabled={!email || password.length < 8}
-        buttonStyle={styles.buttonContainer}
-        onPress={signin}
-      />
-    </ImageBackground>
+    <TouchableWithoutFeedback
+      onPress={() => {
+        Keyboard.dismiss();
+        console.log('keyboard dismissed');
+      }}
+    >
+      <ImageBackground source={homeBackground} style={{width: '100%', height: '100%'}}>
+        <Input
+          placeholder='Email'
+          inputContainerStyle={{...styles.inputContainer, marginTop: '60%'}}
+          leftIcon={
+            <Icon
+              name='envelope'
+              size={15}
+            />
+          }
+          onChangeText={text => setEmail(text)}
+        />
+        <Input
+          placeholder='Password'
+          inputContainerStyle={styles.inputContainer}
+          secureTextEntry={true}
+          leftIcon={
+            <Icon
+              name='unlock-alt'
+              size={15}
+            />
+          }
+          onChangeText={text => setPassword(text)}
+        />
+        <Button
+          title='Log In'
+          type='outline'
+          disabled={!email || password.length < 8}
+          buttonStyle={styles.buttonContainer}
+          onPress={signin}
+        />
+      </ImageBackground>
+    </TouchableWithoutFeedback>
   );
 };
 
