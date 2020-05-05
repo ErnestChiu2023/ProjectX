@@ -111,7 +111,7 @@ const SignUp = ({ navigation }) => {
               inputContainerStyle={styles.inputContainer}
               leftIcon={
                 <Icon
-                  name='envelope'
+                  name='user'
                   size={15}
                 />
               }
