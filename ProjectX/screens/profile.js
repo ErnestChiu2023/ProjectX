@@ -13,6 +13,9 @@ import {
 import auth from '@react-native-firebase/auth';
 
 const logout = () => {
+  const user = auth().currentUser;
+
+  console.log('this one ', user);
   auth()
   .signOut()
   .then(() => console.log('User signed out!'));

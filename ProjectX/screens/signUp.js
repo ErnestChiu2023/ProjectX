@@ -64,8 +64,17 @@ const SignUp = ({ navigation }) => {
         onSubmit={(values) => {
           auth()
             .createUserWithEmailAndPassword(values.email, values.password)
-            .then(() => {
+            .then((userCredentials) => {
               console.log('User account created & signed in!');
+              userCredentials.user.updateProfile({
+                displayName: values.username
+              })
+              .then(() => {
+                console.log('user username udpated');
+              })
+              .catch((error) => {
+                throw error;
+              })
             })
             .catch(error => {
               if (error.code === 'auth/email-already-in-use') {
