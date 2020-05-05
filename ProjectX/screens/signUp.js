@@ -2,7 +2,8 @@ import React from 'react';
 import {
   StyleSheet,
   ImageBackground,
-  View
+  View,
+  Alert,
 } from 'react-native';
 
 import homeBackground from '../assets/homeBackground.png';
@@ -55,7 +56,7 @@ const SignUp = ({ navigation }) => {
           } else if (values.confirmPassword.length < 8) {
             errors.confirmPassword = 'Your password must be at least 8 characters';
           } else if (values.confirmPassword !== values.password) {
-            errors.confirmPassword = 'This field needs to match with password';
+            errors.confirmPassword = 'Passwords don\'t match';
           }
 
           console.log(errors);
@@ -68,15 +69,22 @@ const SignUp = ({ navigation }) => {
               console.log('User account created & signed in!');
             })
             .catch(error => {
+              //Alerts if email is already in use
               if (error.code === 'auth/email-already-in-use') {
+                Alert.alert('Email already in use...', 'This email is already associated with an account. Try logging in!', [
+                  {text: 'OK', onPress: () => {console.log('email association alert acknowledged')}}
+                ]);
                 console.log('That email address is already in use!');
               }
-
+              
+              //Not really needed as we already check for invalid email
               if (error.code === 'auth/invalid-email') {
+                Alert.alert('Invalid email...', 'The email entered is invalid. Please try again with a valid email!', [
+                  {text: 'OK', onPress: () => {console.log('email invalid alert acknowledged')}}
+                ]);
                 console.log('That email address is invalid!');
               }
 
-              console.error(error);
             });
         }}
       >
