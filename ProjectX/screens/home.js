@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     marginTop: 200,
   },
   buttonText: {
-    color: 'black',
+    color: '#428df3',
   },
   button: {
     width: 200,
