@@ -1,18 +1,16 @@
-import React, { useState }  from 'react';
-
+import React, { useState, useEffect }  from 'react';
 import {
     StyleSheet,
     View,
     Text,
 } from 'react-native';
-
 import { 
     Button
-   } from 'react-native-elements';
-
+} from 'react-native-elements';
+import { connect } from 'react-redux';
 import auth from '@react-native-firebase/auth';
-import { firestore } from 'firebase';
-// import firestore from '@react-native-firebase/firestore';
+import firestore from '@react-native-firebase/firestore';
+import { getUserProjects } from '../redux/actions';
 
 const logout = () => {
   const user = auth().currentUser;
@@ -23,47 +21,30 @@ const logout = () => {
   .then(() => console.log('User signed out!'));
 }
 
-const userData = {
-  username: 'ZainNoor99',
-  projects: [project1, project2, project3],
-}
-
-const project1 = {
-  name: 'Some random project',
-  description: 'lorem ipsum something something asdsadsd',
-  id: 1,
-}
-
-const project2 = {
-  name: 'Some random project2',
-  description: 'lorem ipsum something something asdsadsd',
-  id: 2,
-}
-
-const project3 = {
-  name: 'Some random project3',
-  description: 'lorem ipsum something something asdsadsd',
-  id: 3,
-}
-
-const Profile = () => {
-  const [projects, setProjects] = useState([]);
-  firestore.collections('users').doc('cZaXOl5KO3fg9wCMO4Jyw4tACly1').get
+const Profile = ({ userId, userProjects, getUserProjects }) => {
+  firestore().doc(`users/${userId}`).get().then(data => {
+    getUserProjects(data._data.projects);
+  });
   return (
     <View>
+      <Button
+        title='Log Out'
+        type='outline'
+        onPress={logout}
+      />
       <View style={styles.aboutSection}>
         <View style={styles.avatarSide}>
-            <Text>{userData.username}</Text>
+            <Text>{}</Text>
         </View>
         <View style={styles.infoSide}>
-          <Text>{userData.username}</Text>
+          <Text>ZainNoor99</Text>
         </View>
       </View>
 
       
 
       <View style={styles.projectsSection}>
-        {userData.projects.length == 0 && 
+        {userProjects && userProjects.length == 0 && 
           <View style={styles.noProjects}>
             <View>
               <Text style={styles.noProjectsText}>You don't have any projects yet!</Text>
@@ -113,5 +94,15 @@ const styles = StyleSheet.create({
     color: 'grey',
   }
 });
+
+const mapDispatchToProps = { getUserProjects }
+
+const mapStateToProps = (state, props) => {
+  const { userReducer } = state;
+  return { 
+    userId: userReducer.userId, 
+    userProjects: userReducer.userProjects,
+  };
+}
   
-export default Profile;
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);
