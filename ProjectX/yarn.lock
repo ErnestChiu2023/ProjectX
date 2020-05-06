@@ -1292,6 +1292,7 @@
   integrity sha512-93t4UlyylX1iUj7jSyFfE4voLk2LmBw5oDJ/BdyfAO7u9DysXE4yu3kkaq+hBlBN4tlSfS+XwWXrigCplMbfpg==
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 "@react-native-firebase/database@^6.7.1":
   version "6.7.1"
   resolved "https://registry.yarnpkg.com/@react-native-firebase/database/-/database-6.7.1.tgz#6bdbdfdc378d1c8f3a3f01a0fff0dfeccc1345a0"
@@ -1299,11 +1300,14 @@
 
 =======
 >>>>>>> Installed firestore module
+=======
+>>>>>>> Removed unused dependencies
 "@react-native-firebase/firestore@^6.7.1":
   version "6.7.1"
   resolved "https://registry.yarnpkg.com/@react-native-firebase/firestore/-/firestore-6.7.1.tgz#f0ccf73b51d73b31e7c9b8896979fa9a129583e3"
   integrity sha512-hODzL694Ar/ao8EAW6QNbYJsqJXyaV7Qzku7TlJop2kIIs+UVzTcSGfnkfrTSJ2wW0ka6sM45asxmfuLkyz0eA==
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 "@react-native-firebase/storage@^6.7.1":
   version "6.7.1"
@@ -1312,6 +1316,8 @@
 
 =======
 >>>>>>> Installed firestore module
+=======
+>>>>>>> Removed unused dependencies
 "@react-navigation/bottom-tabs@^5.3.3":
   version "5.3.3"
   resolved "https://registry.yarnpkg.com/@react-navigation/bottom-tabs/-/bottom-tabs-5.3.3.tgz#fc232218da9cd1334d3d639814dbd27fffed8989"
