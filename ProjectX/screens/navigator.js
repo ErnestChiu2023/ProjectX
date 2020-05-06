@@ -13,6 +13,7 @@ import Login from './login';
 import SignUp from './signUp';
 import Projects from './projects';
 import Profile from './profile';
+import addProject from './addProject';
 
 
 // initializing navigators
@@ -27,8 +28,9 @@ const Navigator = ({ setUserId }) => {
 
   // Handle user state changes
   function onAuthStateChanged(user) {
-    console.log(user);
-    setUserId(user.uid);
+    if (user) {
+      setUserId(user.uid);
+    }
     setUser(user);
     if (initializing) setInitializing(false);
   }
@@ -42,6 +44,7 @@ const Navigator = ({ setUserId }) => {
     <NavigationContainer>
       {user ? (
         <Tab.Navigator>
+          <Tab.Screen name="addProject" component={addProject} />
           <Tab.Screen name="projects" component={Projects} />
           <Tab.Screen name="profile" component={Profile} />
       </Tab.Navigator>
