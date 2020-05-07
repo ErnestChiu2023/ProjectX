@@ -1,6 +1,7 @@
 import { 
   SET_USER_ID,
-  GET_USER_PROJECTS,
+  SET_USER_PROJECTS,
+  SET_USER_DISPLAY_NAME,
 } from './actionTypes';
 
 export const setUserId = (userId) => {
@@ -10,9 +11,16 @@ export const setUserId = (userId) => {
   }
 }
 
-export const getUserProjects = (projects) => {
+export const setUserProjects = (projects) => {
   return {
-    type: GET_USER_PROJECTS,
+    type: SET_USER_PROJECTS,
     payload: { projects },
+  }
+}
+
+export const setUserDisplayName = (displayName) => {
+  return {
+    type: SET_USER_DISPLAY_NAME,
+    payload: { displayName }, 
   }
 }

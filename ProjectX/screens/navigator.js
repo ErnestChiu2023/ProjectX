@@ -3,7 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import React, { useEffect, useState } from 'react';
-import { setUserId } from '../redux/actions';
+import { setUserId, setUserDisplayName } from '../redux/actions';
 
 import auth from '@react-native-firebase/auth';
 import { connect } from 'react-redux';
@@ -21,7 +21,7 @@ const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 
-const Navigator = ({ setUserId }) => {
+const Navigator = ({ setUserId, setUserDisplayName }) => {
   // Set an initializing state whilst Firebase connects
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState();
@@ -30,6 +30,7 @@ const Navigator = ({ setUserId }) => {
   function onAuthStateChanged(user) {
     if (user) {
       setUserId(user.uid);
+      setUserDisplayName(user.displayName);
     }
     setUser(user);
     if (initializing) setInitializing(false);
@@ -65,7 +66,8 @@ const Navigator = ({ setUserId }) => {
 }
 
 const mapDispatchToProps = {
-  setUserId
+  setUserId,
+  setUserDisplayName,
 };
 
 export default connect(null, mapDispatchToProps)(Navigator);
