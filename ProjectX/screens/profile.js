@@ -3,13 +3,19 @@ import {
     StyleSheet,
     View,
     Text,
+    FlatList,
+    TouchableOpacity,
 } from 'react-native';
+
 import { 
     Button
 } from 'react-native-elements';
+
 import { connect } from 'react-redux';
+
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
+
 import { getUserProjects } from '../redux/actions';
 
 const logout = () => {
@@ -51,6 +57,21 @@ const Profile = ({ userId, userProjects, getUserProjects }) => {
             </View>
           </View>
         }
+
+        {userProjects && userProjects.length > 0 &&
+          <View style={styles.noProjects}>
+            <FlatList
+            numColumns={2} 
+              data={userProjects}
+              keyExtractor={(item) => item.projectId}
+              renderItem={({ item }) => (
+                <TouchableOpacity style={styles.projectSquare}>
+                  <Text>{item.title}</Text>
+                </TouchableOpacity>
+              )}
+            />
+          </View>
+        }
       </View>
       
     </View>
@@ -75,7 +96,7 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   projectsSection: {
-    height: '70%',
+    height: '64.1%',
     width: '100%',
     borderColor: '#428df3',
     borderWidth: 2,
@@ -90,7 +111,14 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     color: 'grey',
-  }
+  },
+  projectSquare: {
+    backgroundColor: '#9bedff',
+    width: '45%',
+    marginHorizontal: '2.5%',
+    marginTop: '5%',
+    height: 200,
+  },
 });
 
 const mapDispatchToProps = { getUserProjects }
