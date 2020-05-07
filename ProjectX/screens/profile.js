@@ -43,7 +43,7 @@ const Profile = ({ userId, userProjects, getUserProjects }) => {
             <Text>{}</Text>
         </View>
         <View style={styles.infoSide}>
-          <Text>ZainNoor99</Text>
+          <Text>Username</Text>
         </View>
       </View>
 
