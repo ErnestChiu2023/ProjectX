@@ -22,16 +22,16 @@ const addProject = ({ userId }) => {
       onSubmit={values => {
         console.log(userId);
         firestore()
-          .collection('users')
-          .doc(userId)
+          .doc(`users/${userId}`)
           .update({
             projects: firestore.FieldValue.arrayUnion({ 
               title: values.title, 
-              description: values.description 
+              description: values.description,
+              projectId: (new Date()).getTime().toString(),
             })
           })
           .then(() => {
-            console.log('user added');
+            console.log('project added');
           })
       }}
       validateOnBlur={false}
