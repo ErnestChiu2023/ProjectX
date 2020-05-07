@@ -79,8 +79,6 @@ const styles = StyleSheet.create({
     width: '100%',
     borderColor: '#428df3',
     borderWidth: 2,
-    // borderTopColor: '#428df3',
-    // borderTopWidth: 2,
   },
   noProjects: {
     justifyContent: 'center',
