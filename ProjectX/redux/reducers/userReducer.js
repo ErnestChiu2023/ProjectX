@@ -7,6 +7,11 @@ export default userReducer = (state = {}, action) => {
                 ...state,
                 userId: action.payload.userId,
             }
+        case 'get_user_projects':
+            return {
+                ...state,
+                userProjects: action.payload.projects,
+            }
         default:
             return state;
     }

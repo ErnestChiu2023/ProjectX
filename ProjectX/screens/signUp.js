@@ -11,6 +11,7 @@ import {
 import homeBackground from '../assets/homeBackground.png';
 import { CommonActions } from '@react-navigation/native';
 import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { 
   Input,
@@ -75,11 +76,22 @@ const SignUp = ({ navigation }) => {
             .createUserWithEmailAndPassword(values.email, values.password)
             .then((userCredentials) => {
               console.log('User account created & signed in!');
+
+              firestore()
+                .collection('users')
+                .doc(userCredentials.user.uid)
+                .set({
+                  username: values.username,
+                  projects: []
+                })
+                .then(() => {
+                  console.log('User added to firestore!')
+                })
               userCredentials.user.updateProfile({
                 displayName: values.username
               })
               .then(() => {
-                console.log('user username udpated');
+                console.log('user username updated');
               })
               .catch((error) => {
                 throw error;
