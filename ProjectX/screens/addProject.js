@@ -9,7 +9,7 @@ import {
 import { Formik } from 'formik';
 
 import { Input, Button } from 'react-native-elements';
-
+import { v4 as uuidv4 } from 'uuid';
 import firestore from '@react-native-firebase/firestore';
 
 const addProject = ({ userId }) => {
@@ -27,7 +27,7 @@ const addProject = ({ userId }) => {
             projects: firestore.FieldValue.arrayUnion({ 
               title: values.title, 
               description: values.description,
-              projectId: (new Date()).getTime().toString(),
+              projectId: uuidv4(),
             })
           })
           .then(() => {

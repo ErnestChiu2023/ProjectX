@@ -16,7 +16,7 @@ import { connect } from 'react-redux';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 
-import { getUserProjects } from '../redux/actions';
+import { setUserProjects } from '../redux/actions';
 
 const logout = () => {
   const user = auth().currentUser;
@@ -27,10 +27,21 @@ const logout = () => {
   .then(() => console.log('User signed out!'));
 }
 
-const Profile = ({ userId, userProjects, getUserProjects }) => {
-  firestore().doc(`users/${userId}`).get().then(data => {
-    getUserProjects(data._data.projects);
-  });
+const Profile = ({ userId, userProjects, setUserProjects, userDisplayName }) => {
+  useEffect(() => {
+    const subscriber = firestore()
+      .collection('users')
+      .doc(userId)
+      .onSnapshot(user => {
+        if(user.exists) {
+          setUserProjects(user.data().projects);
+        }
+      });
+
+    // Stop listening for updates when no longer required
+    return () => subscriber();
+  }, [userId])
+
   return (
     <View>
       <Button
@@ -43,7 +54,7 @@ const Profile = ({ userId, userProjects, getUserProjects }) => {
             <Text>{}</Text>
         </View>
         <View style={styles.infoSide}>
-          <Text>ZainNoor99</Text>
+          <Text>{userDisplayName}</Text>
         </View>
       </View>
 
@@ -121,12 +132,13 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapDispatchToProps = { getUserProjects }
+const mapDispatchToProps = { setUserProjects }
 
 const mapStateToProps = (state, props) => {
   const { userReducer } = state;
   return { 
     userId: userReducer.userId, 
+    userDisplayName: userReducer.userDisplayName,
     userProjects: userReducer.userProjects,
   };
 }
